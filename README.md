@@ -63,7 +63,7 @@ Follow the steps below to start the Task Management App using Docker.
 
    ```bash
    git clone https://github.com/EzzElddin-AbdAllah/task-management-app-with-timer.git
-   cd task-management-app
+   cd task-management-app-with-timer
    ```
 
 2. Ensure a `.env` file in the `server` directory with the following content:
