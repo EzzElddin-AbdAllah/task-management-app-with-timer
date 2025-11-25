@@ -1,0 +1,24 @@
+{
+  "name": "task-management-app",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Task Management App with Timer - Turborepo Monorepo",
+  "workspaces": [
+    "task-management-app-client",
+    "task-management-app-server"
+  ],
+  "scripts": {
+    "dev": "concurrently \"npm run dev --workspace=task-management-app-client\" \"npm run dev --workspace=task-management-app-server\"",
+    "build": "npm run build --workspaces",
+    "lint": "npm run lint --workspaces",
+    "start": "concurrently \"npm run start --workspace=task-management-app-client\" \"npm run start --workspace=task-management-app-server\""
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1",
+    "turbo": "latest"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "packageManager": "npm@10.2.4"
+}

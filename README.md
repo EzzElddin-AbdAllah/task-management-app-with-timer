@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This repository contains a Task Management App built with Node.js, Next.js, and MongoDB. The application is Dockerized for easy deployment and development.
+This repository contains a Task Management App built with Node.js, Next.js, and MongoDB. The application uses **npm workspaces** for monorepo management and is also Dockerized for easy deployment.
 
 ## Features
 
@@ -52,12 +52,12 @@ This repository contains a Task Management App built with Node.js, Next.js, and 
 
 Before you begin, ensure you have the following installed:
 
-- Docker
-- Docker Compose
+- **Node.js** (version 18 or higher)
+- **npm** (version 10 or higher)
 
 ## Getting Started
 
-Follow the steps below to start the Task Management App using Docker.
+### Development (npm workspaces)
 
 1. Clone the repository:
 
@@ -66,30 +66,73 @@ Follow the steps below to start the Task Management App using Docker.
    cd task-management-app-with-timer
    ```
 
-2. Ensure a `.env` file in the `server` directory with the following content:
+2. Install all dependencies:
 
-   ```env
-   MONGODB_URI
-   JWT_SECRET
+   ```bash
+   npm install
    ```
 
-3. Build and start the Docker containers:
+   This will install dependencies for both the client and server workspaces.
+
+3. Set up environment variables:
+
+   Create a `.env` file in the `task-management-app-server` directory with the following content:
+
+   ```env
+   MONGODB_URI=your_mongodb_connection_string
+   JWT_SECRET=your_jwt_secret_key
+   ```
+
+4. Start development servers for both client and server:
+
+   ```bash
+   npm run dev
+   ```
+
+   This command will start both applications in parallel:
+
+   - Client (Next.js): [http://localhost:3000](http://localhost:3000)
+   - Server (Express): [http://localhost:8000](http://localhost:8000)
+
+### Available Commands
+
+Run these commands from the **root directory**:
+
+- `npm run dev` - Start development servers for all workspaces
+- `npm run build` - Build all workspaces for production
+- `npm run lint` - Run linting across all workspaces
+- `npm run start` - Start production servers
+
+### Docker Deployment (Alternative)
+
+If you prefer using Docker:
+
+1. Ensure a `.env` file exists in the `task-management-app-server` directory
+
+2. Build and start the Docker containers:
 
    ```bash
    docker-compose up --build
    ```
 
-   This command will build the Docker images and start the containers for the server, and the client.
-
-4. Once the containers are running, you can access the Task Management App in your web browser:
+3. Access the application:
 
    - Client (Next.js): [http://localhost:3000](http://localhost:3000)
    - Server (Express): [http://localhost:8000](http://localhost:8000)
 
-## Stopping the Application
+4. To stop the application:
 
-To stop the application and remove the Docker containers, run the following command:
+   ```bash
+   docker-compose down
+   ```
 
-```bash
-docker-compose down
+## Project Structure
+
+```
+task-management-app/
+├── task-management-app-client/  # Next.js frontend workspace
+├── task-management-app-server/  # Express.js backend workspace
+├── package.json                 # Root package with workspace config
+├── turbo.json                  # Turborepo pipeline configuration
+└── docker-compose.yml          # Docker
 ```
